@@ -10,7 +10,7 @@ In this project, you'll use three command-line tools to analyze the behavior of 
 
 ##### What should I submit?
 
-- Submit your code and data using `ok`.  You should submit the following, described in more detail below:
+- Submit your Python code and JSON data using `ok`. Your code should be Python 2 compatible. In particular, you should submit the following files (described in more detail in later sections):
 
   Code:
     - `rtts.py`
@@ -62,6 +62,8 @@ You can do so by calling the `ping` shell command from python using the subproce
 
 ``` ping -c 100 google.com ```
 
+*Note: the -c argument may be different on Windows. If it doesn't work, try -n instead.*
+
 `run_ping` should generate two json outputs.
 
 - Raw ping results. This file includes the detailed result on a per packet level. The data format is:
@@ -84,8 +86,7 @@ You can do so by calling the `ping` shell command from python using the subproce
   }
   ```
 
-  The hostnames are again strings and are each mapped to three aggregated numbers: drop rate, maximum RTT, and median RTT. Drop rate should be specified in percentage between 0.0 and 100.0 (e.g. if you observe 5 packets dropped in a ping run of 500, the percentage is 1.0). Max RTT and median RTT should be in milliseconds. All three numbers should be floats.
-If a website does not respond to pings at all, then max and median RTT should be -1.0, and drop rate should be 100.0.
+  The hostnames are again strings and are each mapped to three aggregated numbers: drop rate, maximum RTT, and median RTT. Drop rate should be specified in percentage between 0.0 and 100.0 (e.g. if you observe 5 packets dropped in a ping run of 500, the percentage is 1.0). Max RTT and median RTT should be in milliseconds. All three numbers should be floats. If a website has a few dropped ping packets, do NOT include these in the median/max calculation. If a website does not respond to pings at all, then max and median RTT should be -1.0, and drop rate should be 100.0.
 
 For example outputs, please take a look at `examples/sample_ping.txt` and `examples/sample_ping.json`. The text file shows the raw text output from pinging google.com 10 times, and the json file shows the json formatted raw ping results. 
 
@@ -98,9 +99,10 @@ The other two functions should should generate CDF graphs using the json data pr
 
 Using your scripts, please run the following experiments.
 
-a) Ping each each Alexa top 100 website 10 times. You should store `rtts.py`'s output in two files: `rtt_a_raw.json` (with raw json data only) and `rtt_a_agg.json` (with aggregated json data only). 
+a) Ping each Alexa top 100 website 10 times. You should store `rtts.py`'s output in two files: `rtt_a_raw.json` (with raw json data only) and `rtt_a_agg.json` (with aggregated json data only). 
 
 b) Next, we want to take a look at a few websites’ ping behavior in more detail. The websites are: google.com, todayhumor.co.kr, zanvarsity.ac.tz, taobao.com. Ping each website 500 times. Again, generate two json files: `rtt_b_raw.json` and `rtt_b_agg.json`.
+
 
 **Short answer questions**
 
@@ -109,11 +111,20 @@ b) Next, we want to take a look at a few websites’ ping behavior in more detai
    - Using the plot functions and `rtt_a_agg.json`, please plot a CDF of the *median* RTT of the websites that respond to ping.
 2. Questions on experiment b:
    - What are the median RTT and maximum RTT for each website? What loss rate do you observe?
-   - Using the plot functions to and `rtt_b_raw.json`, please plot a CDF of the RTT for *each* website (i.e. there should be 4 different graphs).
+   - Using the plot functions to and `rtt_b_raw.json`, please plot a CDF of the RTT for *each* website. You can plot the four CDFs on the same graph. Be sure to include a legend so we know which CDF corresponds to which of the four websites.
 3. In this question, you will analyze the ping times to two websites and compare the results to the expected speed-of-light times. The websites are google.com (located in Mountain View, CA, USA) and zanvarsity.ac.tz (located in Zanzibar, Tanzania). You can use your ping data from experiment b. The distance from Berkeley to Mountain view is 35.23 miles, and the distance from Berkeley to Zanzibar is 9,953.50 miles.
    - Compare the median ping time to the speed of light time.  What’s the multiplier for each server (calculate as [ping time / speed of light time])?
    - Using one sentence each, list two reasons why the ping time is not equal to the speed of light time.  Plausible but unlikely answers (e.g., “a bear chewed through the wire, causing a long delay) will not receive full credit.
    - [Optional] Repeat #3 for any website you might be curious about. How much route inflation do you observe? This [tool](http://pythonhosted.org/python-geoip/) might be useful in identifying a website’s physical location.
+
+**Important notes**
+
+- Some `ping` implementations seem to exhibit the following behavior -- a timeout message is not printed until the program starts sending the *next* packet.
+Therefore, if a website does not respond to `ping` at all, you will only get 9 output messages when you ping the website 10 times.
+To make sure that you don't miss a timeout message, please try to run the experiments with *one more ping packet* than needed (e.g. for part a, ping each website 11 times instead of 10 times), then parse only the necessary output (e.g. for part a, parse the first 10 RTTs if you get 11 RTTs back).
+- Some Windows machines do not seem to be able to measure RTTs accurately (they do not go past the millisecond precision). Please try to use a machine that does measure accurately (some of the instructional machines, like hive[x].cs.berkeley.edu, should support accurate ping measurements).
+- You don't have to worry about rounding your RTT numbers -- just use the numbers that ping outputs, and convert into floats.
+
 
 ##### Part 1 hints
 - Be careful with parsing pings that fail because the output data format will be different.
@@ -218,7 +229,7 @@ Your script should resolve each site starting from the root (i.e., first query t
 
     dig +trace +tries=1 +nofail www.google.com
     
-Note that this command also includes some extra flags.  The `+tries=1` and `+nofail` flags signal to dig not to failover when the DNs lookup fails, so that you can count how many lookups fail.
+Note that this command also includes some extra flags.  The `+tries=1` and `+nofail` flags signal to dig not to failover when the DNS lookup fails, so that you can count how many lookups fail.
 
 If the `dns_query_server` is specified, your script should send DNS requests to the specified server, and should not use the `+trace` argument; e.g.:
 
@@ -316,16 +327,38 @@ The easiest way to call a shell command is to use the `subprocess` library's `ch
     import subprocess
     ls_output = subprocess.check_output("ls", shell=True)
 
+
+##### How do I parse the shell command output in Python?
+
+There are many approaches for parsing commandline output. One way is to use the Python [regex library](https://docs.python.org/2/library/re.html) to parse the outputs. Regular expression is a powerful tool for pattern matching expected outputs.
+Another way is to split each line into items using `line.split()` (by default, python's split function splits on whitespace).
+This will turn the text output into a more structured format that allows for easier parsing.
+
+You shouldn't use another library that specifically parses ping/traceroute/dig outputs (e.g. this [library](https://pypi.python.org/pypi/pingparsing/0.2.5) is not allowed).
+    
+##### What is a CDF and what should my CDF look like?
+
+A CDF (cumulative distribution function) shows, for all values *x* on the x-axis, the probability that a variable will take a value less than or equal to *x* (see [Wikipedia](https://en.wikipedia.org/wiki/Cumulative_distribution_function) for more).  For example, here's a CDF we generated of the TTLs of DNS entries for the Alexa top 100 websites:
+
+![Example CDF of DNS ttls](https://github.com/NetSys/cs168_student/blob/master/projects/proj3_measurement/example_cdf_dns_ttl.png)
+
+Note that you do not need to make this CDF (but it may be useful for sanity checking your results); for the TTL of DNS entries, you're only expected to report the average.  This particular CDF uses a log-scale x-axis (you also do not need to do this!).
+
+One thing you can understand from a CDF is median values: the median value is the x-value at which the y-value of the line is 0.5.  In the example CDF above, the median TTL of the terminating DNS record (i.e., the A or CNAME record) is 200 seconds.  The median TTL of the DNS entries for the root servers is approximately 5*10^5.  The CDF is also useful for understanding the distribution.  For example, from the CDF above, we can see that the root servers and top level domain servers have essentially constant TTL, because the CDF is a straight vertical line (this makes sense since all queries use the same root server).  On the other hand, the terminating records and other records have TTLs that vary much more widely.  For the terminating DNS records for example, the shortest 5% of TTLs are less than about 50 seconds, and the largest 5% of TTLs are more than 10^5 seconds (~27 hours)(it's hard to see the exact value for the largest 5% because the legend covers it up -- this poor placement of the legend is not something you should emulate!).
+
+The CDFs you make should be visually similar to the plot above (see the following FAQ for how to do this using matplotlib).
+
+
 ##### How should I generate a plot?
 
 We recommend using matplotlib to generate plots.  Suppose you have list x_values that contains all of the x values of points that you’d like to plot, and a second corresponding list (with the same length) y_values:
 
      import matplotlib.pyplot as plot
-     plot.plot(y_values, x_values, label=”My data”)
+     plot.plot(x_values, y_values, label=”My data”)
      plot.legend() # This shows the legend on the plot.
      plot.grid() # Show grid lines, which makes the plot easier to read.
      plot.xlabel("x axis!") # Label the x-axis.
-     plot.xlabel("y axis!") # Label the y-axis.
+     plot.ylabel("y axis!") # Label the y-axis.
      plot.show()
 
 ##### How can I automatically save the result of my plot to a file?
@@ -334,4 +367,3 @@ We recommend using matplotlib to generate plots.  Suppose you have list x_values
      my_filepath = “dns_plot.pdf”
      with backendpdf.PdfPages(my_filepath) as pdf:
           pdf.savefig()
-
