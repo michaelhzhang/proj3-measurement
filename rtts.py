@@ -1,7 +1,9 @@
 import subprocess
-import re
 import numpy as np
 import json
+import matplotlib.pyplot as plot
+import statsmodels.api as sm
+from matplotlib.backends import backend_pdf
 
 def run_ping(hostnames, num_packets, raw_ping_output_filename,
              aggregated_ping_output_filename):
@@ -38,7 +40,7 @@ def parse_ping_output(shell_output, num_packets):
     lines = shell_output.split('\n')
     rtts = []
     for line in lines:
-        if (len(rtts) == num_packets):
+        if (len(rtts) == num_packets): # might call ping more times
             break
         if ((len(line) > 0) and
             (not is_first_line(line)) and
@@ -91,7 +93,24 @@ def compute_summary_stats(rtt_list):
     return result_dict
 
 def plot_median_rtt_cdf(agg_ping_results_filename, output_cdf_filename):
-    pass
+    json_data = open(aggregated_ping_output_filename,"r").read()
+    data = json.loads(json_data)
+    medians = []
+    for hostname in data:
+        median = data[hostname]['median']
+        if median != -1.0:
+            medians.append(median)
+    x = sorted(medians)
+    y = sm.distributions.ECDF(x)
+    plt.step(x,y)
+    plt.grid()
+    plt.xlabel('ms')
+    plt.ylabel('Cumulative fraction')
+    plt.show()
+    with backendpdf.PdfPages(output_cdf_filename) as pdf:
+        pdf.savefig()
 
 def plot_ping_cdf(raw_ping_results_filename, output_cdf_filename):
+    json_data = open(raw_ping_output_filename,"r").read()
+    data = json.loads(json_data)
     pass
