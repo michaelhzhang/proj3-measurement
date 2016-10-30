@@ -2,7 +2,6 @@ import subprocess
 import numpy as np
 import json
 import matplotlib.pyplot as plot
-import statsmodels.api as sm
 from matplotlib.backends import backend_pdf
 
 def run_ping(hostnames, num_packets, raw_ping_output_filename,
@@ -93,38 +92,45 @@ def compute_summary_stats(rtt_list):
     return result_dict
 
 def plot_median_rtt_cdf(agg_ping_results_filename, output_cdf_filename):
-    json_data = open(aggregated_ping_output_filename,"r").read()
+    json_data = open(agg_ping_results_filename,"r").read()
     data = json.loads(json_data)
     medians = []
     for hostname in data:
-        median = data[hostname]['median']
+        median = data[hostname]['median_rtt']
         if median != -1.0:
             medians.append(median)
-    x = sorted(medians)
-    y = sm.distributions.ECDF(x)
-    plt.step(x,y)
-    plt.grid()
-    plt.xlabel('ms')
-    plt.ylabel('Cumulative fraction')
-    plt.show()
-    with backendpdf.PdfPages(output_cdf_filename) as pdf:
-        pdf.savefig()
+    x = np.sort(medians)
+    y = cdf_y_vals(x)
+    fig = plot.figure()
+    plot.step(x,y)
+    plot.grid()
+    plot.xlabel('ms')
+    plot.ylabel('Cumulative fraction')
+    plot.show()
+    with backend_pdf.PdfPages(output_cdf_filename) as pdf:
+        pdf.savefig(fig)
+
+def cdf_y_vals(sorted_vals):
+    y_vals = np.arange(len(sorted_vals))/float(len(sorted_vals))
+    return y_vals
 
 def plot_ping_cdf(raw_ping_results_filename, output_cdf_filename):
-    json_data = open(raw_ping_output_filename,"r").read()
+    json_data = open(raw_ping_results_filename,"r").read()
     data = json.loads(json_data)
+    fig = plot.figure()
     for hostname in data:
         rtts = data[hostname]
         no_drops = np.array(rtts)
         no_drops = no_drops[no_drops != -1.0]
         assert(len(no_drops) > 0)
-        x = sorted(no_drops)
-        y = sm.distributions.ECDF(x)
-        plt.plot(x,y,label=hostname)
-    plt.grid()
-    plt.xlabel('ms')
-    plt.ylabel('Cumulative fraction')
-    plt.show()
-    with backendpdf.PdfPages(output_cdf_filename) as pdf:
-        pdf.savefig()
+        x = np.sort(no_drops)
+        y = cdf_y_vals(x)
+        plot.plot(x,y,label=hostname)
+    plot.grid()
+    plot.xlabel('ms')
+    plot.ylabel('Cumulative fraction')
+    plot.legend()
+    plot.show()
+    with backend_pdf.PdfPages(output_cdf_filename) as pdf:
+        pdf.savefig(fig)
 
