@@ -1,3 +1,6 @@
+REVERSE
+TIMESTAMP: 1477270887.598754
+ORIG_HOSTNAME: 136.152.142.118
 Tracing the route to airbears2-136-152-142-118.airbears2.berkeley.edu (136.152.142.118)
 VRF info: (vrf in name/id, vrf out name/id)
 1 gig10-0-16.gwy1-mtl.bb.allstream.net (216.191.14.249) [AS 15290] 0 msec 0 msec 0 msec
