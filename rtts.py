@@ -113,4 +113,18 @@ def plot_median_rtt_cdf(agg_ping_results_filename, output_cdf_filename):
 def plot_ping_cdf(raw_ping_results_filename, output_cdf_filename):
     json_data = open(raw_ping_output_filename,"r").read()
     data = json.loads(json_data)
-    pass
+    for hostname in data:
+        rtts = data[hostname]
+        no_drops = np.array(rtts)
+        no_drops = no_drops[no_drops != -1.0]
+        assert(len(no_drops) > 0)
+        x = sorted(no_drops)
+        y = sm.distributions.ECDF(x)
+        plt.plot(x,y,label=hostname)
+    plt.grid()
+    plt.xlabel('ms')
+    plt.ylabel('Cumulative fraction')
+    plt.show()
+    with backendpdf.PdfPages(output_cdf_filename) as pdf:
+        pdf.savefig()
+

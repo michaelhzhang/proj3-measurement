@@ -2,7 +2,7 @@ import rtts
 
 # rtt_a
 print("Alexa")
-alexa_hosts = open('alexa_top_100','r').read().split('\n')
+alexa_hosts = open('alexa_top_100','r').read().split('\n')[:-1]
 rtts.run_ping(alexa_hosts, 10, 'results/rtt_a_raw.json','results/rtt_a_agg.json')
 
 # rtt_b
