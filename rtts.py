@@ -20,7 +20,10 @@ def run_ping(hostnames, num_packets, raw_ping_output_filename,
 
 def call_ping(hostname, num_packets):
     command = construct_ping_command(hostname, num_packets)
-    shell_output = subprocess.check_output(command, shell=True)
+    try:
+        shell_output = subprocess.check_output(command, shell=True)
+    except subprocess.CalledProcessError as e: # in case exit code nonzero
+        shell_output = e.output
     rtts = parse_ping_output(shell_output, num_packets)
     return rtts
 
