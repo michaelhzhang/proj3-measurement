@@ -102,7 +102,7 @@ def is_int(string):
 
 def is_continuing_hop(line):
     tokens = line.split()
-    return ((len(tokens) > 0) and is_AS(tokens[0])) #TODO: will all continuing hops have AS numbers?
+    return ((len(tokens) > 0) and is_AS(tokens[0]))
 
 def is_AS(token):
     """Checks if token is an ASN"""
@@ -130,7 +130,7 @@ def parse_hop(line):
         result["ip"] = ip
     return result
 
-def part_a_run():
+def part_a_run(run_num):
     print("Running part a at time " + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
     part_a_sites = ["google.com",
                     "facebook.com",
@@ -140,8 +140,9 @@ def part_a_run():
                     "www.city.kobe.lg.jp",
                     "www.vutbr.cz",
                     "zanvarsity.ac.tz"]
-    run_traceroute(part_a_sites,5,"tr_a_tmp")
-    parse_traceroute("tr_a_tmp","results/tr_a.json")
+    tmp_file = "tmp_traces/tr_a_tmp_" + str(run_num)
+    run_traceroute(part_a_sites,5,tmp_file)
+    parse_traceroute(tmp_file,"results/tr_a.json")
 
 def part_b_run_from_our_computer():
     print("Running part b from our computer at time " + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
@@ -149,16 +150,16 @@ def part_b_run_from_our_computer():
                       "route-server.ip-plus.net",
                       "route-views.oregon-ix.net",
                       "route-server.eastern.allstream.com"]
-    run_traceroute(part_b_servers,5,"tr_b_tmp")
-    parse_traceroute("tr_b_tmp","results/tr_b.json")
+    run_traceroute(part_b_servers,5,"tmp_traces/tr_b_tmp")
+    parse_traceroute("tmp_traces/tr_b_tmp","results/tr_b.json")
 
 def main():
-    part_b_run_from_our_computer()
+    # part_b_run_from_our_computer()
 
     SECONDS_IN_HOUR = 60*60
     num_a_runs = 5
     for i in range(num_a_runs):
-        part_a_run()
+        part_a_run(i)
         if (i < (num_a_runs-1)):
             time.sleep(SECONDS_IN_HOUR)
 
