@@ -78,7 +78,7 @@ def compute_summary_stats(rtt_list):
         drop_rate = num_drops / float(num_pings)
         drop_rate *= 100
         no_drops = np.array(rtt_list)
-        no_drops = no_drops[no_drops != 1.0]
+        no_drops = no_drops[no_drops != -1.0]
         max_rtt = max(no_drops)
         median_rtt = np.median(no_drops)
     result_dict = {}
