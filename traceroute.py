@@ -134,4 +134,37 @@ def parse_hop(line):
         result["ip"] = ip
     return result
 
+def part_a_run():
+    print("Running part a at time " + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
+    part_a_sites = ["google.com",
+                    "facebook.com",
+                    "www.berkeley.edu",
+                    "allspice.lcs.mit.edu",
+                    "todayhumor.co.kr",
+                    "www.city.kobe.lg.jp",
+                    "www.vutbr.cz",
+                    "zanvarsity.ac.tz"]
+    run_traceroute(part_a_sites,5,"tr_a_tmp")
+    parse_traceroute("tr_a_tmp","results/tr_a.json")
 
+def part_b_run_from_our_computer():
+    print("Running part b from our computer at time " + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
+    part_b_servers = ["tpr-route-server.saix.net",
+                      "route-server.ip-plus.net",
+                      "route-views.oregon-ix.net",
+                      "route-server.eastern.allstream.com"]
+    run_traceroute(part_b_servers,5,"tr_b_tmp")
+    parse_traceroute("tr_b_tmp","results/tr_b.json")
+
+def main():
+    part_b_run_from_our_computer()
+
+    SECONDS_IN_HOUR = 60*60
+    num_a_runs = 5
+    for i in range(num_a_runs):
+        part_a_run()
+        if (i < (num_a_runs-1)):
+            time.sleep(SECONDS_IN_HOUR)
+
+if __name__ == "__main__":
+    main()
