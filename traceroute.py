@@ -5,17 +5,19 @@ import re
 
 TIMESTAMP_PHRASE = "TIMESTAMP: "
 HOSTNAME_PHRASE = "ORIG_HOSTNAME: "
-INITIAL_TRACEROUTE_PHRASE = "traceroute to"
+TRACEROUTE_OUTPUT_PHRASE = "traceroute"
 
 def run_traceroute(hostnames, num_packets, output_filename):
     curr_time = time.time()
     with open(output_filename,"w") as out:
-        out.write(TIMESTAMP_PHRASE + str(curr_time) + "\n")
+        to_write = TIMESTAMP_PHRASE + str(curr_time) + "\n"
         for hostname in hostnames:
-            out.write(HOSTNAME_PHRASE + hostname + "\n")
+            to_write += HOSTNAME_PHRASE + hostname + "\n"
             trace_command = construct_command(hostname, num_packets)
             trace_output = subprocess.check_output(trace_command, shell=True)
-            out.write(trace_output + "\n")
+            to_write += trace_output
+        to_write = to_write.strip() # Strip trailing whitespace
+        out.write(to_write)
 
 def construct_command(hostname, num_packets):
     command = "traceroute -a -q "
@@ -26,21 +28,23 @@ def construct_command(hostname, num_packets):
     return command
 
 def parse_traceroute(raw_traceroute_filename, output_filename):
-    trace_output = open(raw_traceroute_filename,"r").read().split('\n')
+    trace_output = open(raw_traceroute_filename,"r").read().strip().split('\n')
     curr_hostname = None
     result = {}
     curr_trace = None
     curr_hop = None
+    count = 0
     for line in trace_output:
         if is_timestamp(line):
             result["timestamp"] = parse_timestamp(line)
         elif is_hostname(line):
             if curr_hostname is not None: # new trace
+                curr_trace.append(curr_hop)
                 record_results(curr_hostname, curr_trace, result)
                 curr_hop = None
             curr_hostname = parse_hostname(line)
             curr_trace = []
-        elif is_initial_traceroute_line(line):
+        elif is_traceroute_output(line):
             continue # skip
         elif is_new_hop(line):
             if curr_hop is not None:
@@ -52,10 +56,13 @@ def parse_traceroute(raw_traceroute_filename, output_filename):
         else:
             print("Unexpected line: ")
             print(line)
-    # Finish parsing last trace
+    # Finish parsing last hop and trace
+    if curr_hop is not None:
+        curr_trace.append(curr_hop)
     record_results(curr_hostname, curr_trace, result)
     with open(output_filename,"a") as out: # Append instead of overwrite
         json.dump(result, out)
+        out.write("\n") # Add newline
 
 def is_timestamp(line):
     length = len(TIMESTAMP_PHRASE)
@@ -63,7 +70,7 @@ def is_timestamp(line):
 
 def parse_timestamp(line):
     tokens = line.split()
-    timestamp = int(tokens[1])
+    timestamp = tokens[1]
     return timestamp
 
 def is_hostname(line):
@@ -75,12 +82,12 @@ def record_results(curr_hostname, curr_trace, result):
 
 def parse_hostname(line):
     tokens = line.split()
-    hostname = int(tokens[1])
+    hostname = tokens[1]
     return hostname
 
-def is_initial_traceroute_line(line):
-    length = len(INITIAL_TRACEROUTE_PHRASE)
-    return ((len(line)>=length) and (line[:length] == INITIAL_TRACEROUTE_PHRASE))
+def is_traceroute_output(line):
+    length = len(TRACEROUTE_OUTPUT_PHRASE)
+    return ((len(line)>=length) and (line[:length] == TRACEROUTE_OUTPUT_PHRASE))
 
 def is_new_hop(line):
     tokens = line.split()
@@ -109,19 +116,21 @@ def parse_hop(line):
         AS_index = 0
     tokens = line.split()
     assert(len(tokens)>=3)
-    ASN = tokens[AS_index].lstrip('[').rstrip(']')
+    ASN = tokens[AS_index].lstrip('[AS').rstrip(']')
     name = tokens[AS_index+1]
     ip = tokens[AS_index+2].lstrip('(').rstrip(')')
     result = {}
     if ASN == "*":
-        result["ASN"] = None
+        result["asn"] = "None"
     else:
-        result["ASN"] = ASN
+        result["asn"] = ASN
     if name == "*":
-        result["name"] = None
+        result["name"] = "None"
     else:
         result["name"] = name
     if ip == "*":
+        result["ip"] = "None"
+    else:
         result["ip"] = ip
     return result
 
