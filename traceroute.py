@@ -120,17 +120,13 @@ def parse_hop(line):
     name = tokens[AS_index+1]
     ip = tokens[AS_index+2].lstrip('(').rstrip(')')
     result = {}
-    if ASN == "*":
+    if ASN == "*": # Not responding
         result["asn"] = "None"
-    else:
-        result["asn"] = ASN
-    if name == "*":
         result["name"] = "None"
-    else:
-        result["name"] = name
-    if ip == "*":
         result["ip"] = "None"
     else:
+        result["asn"] = ASN
+        result["name"] = name
         result["ip"] = ip
     return result
 
