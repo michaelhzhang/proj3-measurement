@@ -110,8 +110,8 @@ def plot_median_rtt_cdf(agg_ping_results_filename, output_cdf_filename):
     with backend_pdf.PdfPages(output_cdf_filename) as pdf:
         pdf.savefig(fig)
 
-def cdf_y_vals(sorted_vals):
-    y_vals = np.arange(len(sorted_vals))/float(len(sorted_vals))
+def cdf_y_vals(sorted_x_vals):
+    y_vals = np.arange(len(sorted_x_vals))/float(len(sorted_x_vals))
     return y_vals
 
 def plot_ping_cdf(raw_ping_results_filename, output_cdf_filename):
@@ -133,4 +133,25 @@ def plot_ping_cdf(raw_ping_results_filename, output_cdf_filename):
     plot.show()
     with backend_pdf.PdfPages(output_cdf_filename) as pdf:
         pdf.savefig(fig)
+
+def main():
+    # rtt_a
+    print("Alexa")
+    alexa_hosts = open('alexa_top_100','r').read().split('\n')[:-1]
+    run_ping(alexa_hosts, 10, 'results/rtt_a_raw.json','results/rtt_a_agg.json')
+
+    # rtt_b
+    print('part b')
+    b_hosts = ['google.com', 'todayhumor.co.kr', 'zanvarsity.ac.tz', 'taobao.com']
+    run_ping(b_hosts, 500, 'results/rtt_b_raw.json', 'results/rtt_b_agg.json')
+
+    # Plotting
+    print("plotting a")
+    plot_median_rtt_cdf('results/rtt_a_agg.json','plots/rtt_a_median_cdf.pdf')
+
+    print('plotting b')
+    plot_ping_cdf('results/rtt_b_raw.json','plots/rtt_b_raw_cdf.pdf')
+
+if __name__ == "__main__":
+    main()
 
