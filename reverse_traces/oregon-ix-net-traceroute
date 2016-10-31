@@ -1,0 +1,37 @@
+REVERSE
+TIMESTAMP: 1476670835.941039
+ORIG_HOSTNAME: route-views.oregon-ix.net 
+Type escape sequence to abort.
+Tracing the route to airbears2-136-152-142-118.airbears2.berkeley.edu (136.152.142.118)
+VRF info: (vrf in name/id, vrf out name/id)
+1 vl-51.uonet1-gw.uoregon.edu (128.223.51.2) [AS 3582] 192 msec 48 msec 49 msec
+2 2.bundle-ether10.uonet10-gw.uoregon.edu (128.223.2.10) [AS 3582] 48 msec 48 msec 48 msec
+3 internet2-re1-gw.oregon-gigapop.net (198.32.165.126) [AS 58511] 49 msec 48 msec 48 msec
+4 hpr-lax-hpr2--i2-r&e.cenic.net (137.164.26.200) [AS 2153] 48 msec 48 msec 48 msec
+5 hpr-svl-hpr3--lax-hpr3-100ge.cenic.net (137.164.25.74) [AS 2153] 48 msec 48 msec 48 msec
+6 hpr-ucb--svl-hpr-10g.cenic.net (137.164.27.133) [AS 2153] 48 msec 49 msec 48 msec
+7 t1-3.inr-201-sut.berkeley.edu (128.32.0.65) [AS 25] 48 msec 48 msec
+t1-3.inr-202-reccev.berkeley.edu (128.32.0.67) [AS 25] 48 msec
+8 xe-1-1-0.inr-306-sut.berkeley.edu (128.32.0.59) [AS 25] 48 msec 49 msec 31 msec
+9  *  *  *
+10  *  *  *
+11  *  *  *
+12  *  *  *
+13  *  *  *
+14  *  *  *
+15  *  *  *
+16  *  *  *
+17  *  *  *
+18  *  *  *
+19  *  *  *
+20  *  *  *
+21  *  *  *
+22  *  *  *
+23  *  *  *
+24  *  *  *
+25  *  *  *
+26  *  *  *
+27  *  *  *
+28  *  *  *
+29  *  *  *
+30  *  *  *

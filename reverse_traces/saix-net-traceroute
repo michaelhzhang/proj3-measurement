@@ -1,0 +1,36 @@
+REVERSE
+TIMESTAMP: 1475470550.931312
+ORIG_HOSTNAME: tpr-route-server.saix.net 
+Tracing the route to airbears2-136-152-142-118.airbears2.berkeley.edu (136.152.142.118)
+1 tpr-ip-esr-1-fe-1-0-3.telkom-ipnet.co.za (196.25.9.45) 0 msec 0 msec 0 msec
+2 196.43.9.86 168 msec 168 msec 168 msec
+3 tenge7-2.var01.ldn04.pccwbtn.net (63.218.243.17) 208 msec 344 msec 196 msec
+4  *  *  *
+5 xe-7-0-0.0.rtsw.losa.net.internet2.edu (64.57.20.247) [AS 11164] 328 msec 404 msec 400 msec
+6 64.57.20.83 [AS 11164] 404 msec 400 msec 404 msec
+7 dc-lax-agg6--lax-agg7-100g.cenic.net (137.164.11.10) [AS 2152] 404 msec 400 msec 404 msec
+8 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 404 msec 504 msec 440 msec
+9 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 448 msec 440 msec 444 msec
+10 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 444 msec 440 msec 444 msec
+11 t2-3.inr-201-sut.berkeley.edu (128.32.0.37) [AS 25] 444 msec
+t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 440 msec 440 msec
+12 xe-1-0-0.inr-306-sut.berkeley.edu (128.32.0.57) [AS 25] 404 msec 344 msec
+xe-1-1-0.inr-306-sut.berkeley.edu (128.32.0.59) [AS 25] 336 msec
+13  *  *  *
+14  *  *  *
+15  *  *  *
+16  *  *  *
+17  *  *  *
+18  *  *  *
+19  *  *  *
+20  *  *  *
+21  *  *  *
+22  *  *  *
+23  *  *  *
+24  *  *  *
+25  *  *  *
+26  *  *  *
+27  *  *  *
+28  *  *  *
+29  *  *  *
+30  *  *  *

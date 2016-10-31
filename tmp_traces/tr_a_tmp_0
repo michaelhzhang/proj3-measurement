@@ -1,0 +1,159 @@
+TIMESTAMP: 1477871857.14
+ORIG_HOSTNAME: google.com
+traceroute to google.com (216.58.194.206), 64 hops max, 52 byte packets
+ 1  [AS0] xe-1/2/0-540.inr-306-sut.berkeley.edu (10.142.116.1)  1.737 ms  1.619 ms  1.534 ms  1.541 ms  3.732 ms
+ 2  [AS25] t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)  4.341 ms  1.541 ms  1.422 ms  1.449 ms  2.035 ms
+ 3  [AS25] xe-5-2-0.inr-002-reccev.berkeley.edu (128.32.0.38)  2.121 ms  1.846 ms  4.911 ms  1.754 ms  1.826 ms
+ 4  [AS2152] oak-agg4--ucb-10g.cenic.net (137.164.50.30)  2.732 ms  3.290 ms  2.773 ms  2.726 ms  2.918 ms
+ 5  [AS15169] 74.125.48.172 (74.125.48.172)  4.431 ms  3.583 ms  3.589 ms  3.747 ms  3.409 ms
+ 6  [AS15169] 108.170.242.225 (108.170.242.225)  4.035 ms
+    [AS15169] 108.170.243.1 (108.170.243.1)  4.665 ms
+    [AS15169] 108.170.242.225 (108.170.242.225)  5.339 ms
+    [AS15169] 108.170.243.1 (108.170.243.1)  4.688 ms  4.812 ms
+ 7  [AS15169] 108.170.237.107 (108.170.237.107)  4.894 ms
+    [AS15169] 108.170.237.105 (108.170.237.105)  4.023 ms
+    [AS15169] 108.170.237.107 (108.170.237.107)  5.263 ms  5.202 ms
+    [AS15169] 108.170.237.105 (108.170.237.105)  4.283 ms
+ 8  [AS15169] sfo03s01-in-f206.1e100.net (216.58.194.206)  5.349 ms  4.919 ms  4.871 ms  5.278 ms  5.080 ms
+ORIG_HOSTNAME: facebook.com
+traceroute to facebook.com (31.13.70.36), 64 hops max, 52 byte packets
+ 1  [AS0] xe-1/2/0-540.inr-306-sut.berkeley.edu (10.142.116.1)  8.469 ms  2.193 ms  1.553 ms  1.542 ms  2.462 ms
+ 2  [AS25] t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)  2.255 ms  2.011 ms  1.732 ms  3.946 ms  1.771 ms
+ 3  [AS25] xe-5-2-0.inr-001-sut.berkeley.edu (128.32.0.66)  2.681 ms  1.918 ms  1.923 ms  2.174 ms  1.915 ms
+ 4  [AS2152] dc-sfo-agg-1--ucb-10ge.cenic.net (137.164.50.16)  3.569 ms  4.171 ms  3.088 ms  3.720 ms  2.799 ms
+ 5  [AS2152] dc-svl-agg4--sfo-agg1-10ge-2.cenic.net (137.164.22.7)  5.383 ms  4.988 ms  5.295 ms  7.072 ms  4.768 ms
+ 6  [AS2152] dc-lax-agg6--svl-agg4-100ge.cenic.net (137.164.11.0)  12.201 ms  12.920 ms  11.845 ms  12.908 ms  12.047 ms
+ 7  [AS32934] ae15.pr02.lax1.tfbnw.net (103.4.98.228)  11.551 ms
+    [AS32934] ae17.pr01.lax1.tfbnw.net (103.4.98.188)  11.795 ms
+    [AS32934] ae15.pr02.lax1.tfbnw.net (103.4.98.228)  12.724 ms
+    [AS32934] ae17.pr01.lax1.tfbnw.net (103.4.98.188)  21.384 ms
+    [AS32934] ae15.pr02.lax1.tfbnw.net (103.4.98.228)  19.528 ms
+ 8  [AS32934] po101.psw01c.lax3.tfbnw.net (31.13.29.105)  11.814 ms
+    [AS32934] po102.psw01d.lax3.tfbnw.net (31.13.29.115)  12.921 ms
+    [AS32934] po101.psw01d.lax3.tfbnw.net (31.13.29.107)  12.346 ms
+    [AS32934] po102.psw01b.lax3.tfbnw.net (31.13.29.111)  12.581 ms
+    [AS32934] po101.psw01d.lax3.tfbnw.net (31.13.29.107)  11.949 ms
+ 9  [AS32934] 173.252.67.13 (173.252.67.13)  11.758 ms
+    [AS32934] 173.252.67.169 (173.252.67.169)  12.047 ms
+    [AS32934] 173.252.67.113 (173.252.67.113)  14.990 ms
+    [AS32934] 173.252.67.9 (173.252.67.9)  14.262 ms
+    [AS32934] 173.252.67.59 (173.252.67.59)  14.935 ms
+10  [AS32934] edge-star-mini-shv-01-lax3.facebook.com (31.13.70.36)  12.176 ms  16.450 ms  12.148 ms  12.412 ms  12.050 ms
+ORIG_HOSTNAME: www.berkeley.edu
+traceroute to www.w3.berkeley.edu (128.32.203.137), 64 hops max, 52 byte packets
+ 1  [AS0] xe-1/2/0-540.inr-306-sut.berkeley.edu (10.142.116.1)  26.831 ms  2.057 ms  2.463 ms  1.597 ms  2.728 ms
+ 2  [AS25] t5-4.inr-201-sut.berkeley.edu (128.32.0.56)  1.939 ms  1.904 ms  1.521 ms  1.463 ms  2.021 ms
+ 3  [AS25] e3-48.inr-310-ewdc.berkeley.edu (128.32.0.97)  1.593 ms  2.251 ms  2.352 ms  1.486 ms  1.443 ms
+ 4  [AS25] calweb-farm-prod.ist.berkeley.edu (128.32.203.137)  2.428 ms  10.625 ms  11.584 ms  4.354 ms  4.959 ms
+ORIG_HOSTNAME: allspice.lcs.mit.edu
+traceroute to mercury.lcs.mit.edu (18.26.0.122), 64 hops max, 52 byte packets
+ 1  [AS0] xe-1/2/0-540.inr-306-sut.berkeley.edu (10.142.116.1)  6.935 ms  4.848 ms  2.554 ms  1.917 ms  1.441 ms
+ 2  [AS25] t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)  2.213 ms  2.394 ms  5.507 ms  2.861 ms  3.228 ms
+ 3  [AS25] xe-5-2-0.inr-001-sut.berkeley.edu (128.32.0.66)  4.295 ms  3.293 ms  3.509 ms  4.722 ms  3.580 ms
+ 4  [AS2152] hpr-svl--ucb-10ge.cenic.net (137.164.27.132)  4.685 ms  6.690 ms  7.275 ms  7.876 ms  3.836 ms
+ 5  [AS2152] hpr-i2--svl-hpr.cenic.net (137.164.26.142)  31.279 ms  30.701 ms  56.342 ms  44.406 ms  29.164 ms
+ 6  [AS0] et-7-3-0.4070.rtsw.salt.net.internet2.edu (198.71.45.24)  31.242 ms  32.147 ms  35.243 ms  33.071 ms  34.516 ms
+ 7  [AS0] et-4-1-0.4070.rtsw.kans.net.internet2.edu (198.71.45.18)  61.636 ms  57.551 ms  61.495 ms  60.113 ms  58.176 ms
+ 8  [AS0] et-5-3-0.4070.rtsw.chic.net.internet2.edu (198.71.45.14)  72.665 ms  69.217 ms  69.041 ms  68.994 ms  68.646 ms
+ 9  [AS0] et-4-1-0.4070.rtsw.clev.net.internet2.edu (198.71.45.9)  78.438 ms  78.399 ms  78.111 ms  78.543 ms  78.812 ms
+10  [AS0] nox1sumgw1-i2-re.nox.org (192.5.89.17)  91.428 ms  92.805 ms  92.765 ms  91.836 ms  92.079 ms
+11  [AS549] mit-re-nox1sumgw1.nox.org (207.210.143.110)  92.033 ms  92.015 ms  93.297 ms  92.513 ms  94.192 ms
+12  [AS3] dmz-rtr-1-external-rtr-3.mit.edu (18.192.7.1)  127.714 ms  125.595 ms  136.214 ms  126.467 ms  135.026 ms
+13  [AS3] dmz-rtr-2-dmz-rtr-1-2.mit.edu (18.192.3.2)  129.693 ms  132.107 ms  130.269 ms
+    [AS3] dmz-rtr-2-dmz-rtr-1-1.mit.edu (18.192.2.2)  134.222 ms
+    [AS3] dmz-rtr-2-dmz-rtr-1-2.mit.edu (18.192.3.2)  134.547 ms
+14  * * * * *
+15  [AS3] helicon-ext.trantor.csail.mit.edu (128.30.13.6)  133.734 ms  132.899 ms  133.146 ms  136.516 ms  133.262 ms
+16  * * * * *
+17  [AS3] mercury.lcs.mit.edu (18.26.0.122)  99.032 ms !Z  92.344 ms !Z  92.383 ms !Z  91.627 ms !Z  90.511 ms !Z
+ORIG_HOSTNAME: todayhumor.co.kr
+traceroute: Warning: todayhumor.co.kr has multiple addresses; using 141.101.121.192
+traceroute to todayhumor.co.kr (141.101.121.192), 64 hops max, 52 byte packets
+ 1  [AS0] xe-1/2/0-540.inr-306-sut.berkeley.edu (10.142.116.1)  3.825 ms  1.520 ms  2.934 ms  4.214 ms  14.803 ms
+ 2  [AS25] t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)  3.128 ms  4.398 ms  2.596 ms  2.847 ms  13.195 ms
+ 3  [AS25] xe-5-2-0.inr-001-sut.berkeley.edu (128.32.0.66)  8.626 ms  2.282 ms  5.615 ms  7.818 ms  2.575 ms
+ 4  [AS2152] dc-sfo-agg-1--ucb-10ge.cenic.net (137.164.50.16)  4.869 ms  3.170 ms  2.653 ms  2.940 ms  2.996 ms
+ 5  [AS2152] dc-svl-agg4--sfo-agg1-10ge-1.cenic.net (137.164.22.27)  4.350 ms  4.026 ms  3.836 ms  4.142 ms  4.382 ms
+ 6  * * * * [AS3356] 10-1-1-91.ear1.sanjose1.level3.net (4.15.122.45)  5.683 ms
+ 7  * * * * *
+ 8  [AS12956] 213.140.53.132 (213.140.53.132)  74.069 ms  73.570 ms  76.151 ms  70.726 ms  70.818 ms
+ 9  [AS0] xe-0-1-16-grtmiabr2.net.telefonicaglobalsolutions.com (5.53.4.21)  87.776 ms
+    [AS12956] gi0-0-0-4-grtmiabr6.net.telefonicaglobalsolutions.com (213.140.37.187)  92.758 ms
+    [AS0] te0-8-0-3-grtmiabr6.net.telefonicaglobalsolutions.com (94.142.126.185)  91.975 ms  93.190 ms
+    [AS12956] xe9-0-16-0-grtmiabr2.red.telefonica-wholesale.net (213.140.35.51)  121.082 ms
+10  [AS12956] et-27-0-0-0-4-grtmiabr4.red.telefonica-wholesale.net (84.16.15.129)  83.085 ms  92.077 ms *  81.675 ms  91.975 ms
+11  * [AS0] cloudflare-ae31-0-grtmiana2.net.telefonicaglobalsolutions.com (176.52.253.225)  89.155 ms  88.586 ms *  92.446 ms
+12  [AS13335] 141.101.121.192 (141.101.121.192)  86.556 ms
+    [AS0] cloudflare-ae31-0-grtmiana2.net.telefonicaglobalsolutions.com (176.52.253.225)  93.184 ms  82.997 ms
+    [AS13335] 141.101.121.192 (141.101.121.192)  85.728 ms  80.462 ms
+ORIG_HOSTNAME: www.city.kobe.lg.jp
+traceroute to www.city.kobe.lg.jp (202.246.160.48), 64 hops max, 52 byte packets
+ 1  [AS0] xe-1/2/0-540.inr-306-sut.berkeley.edu (10.142.116.1)  1.879 ms  3.838 ms  1.412 ms  1.596 ms  3.100 ms
+ 2  [AS25] t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)  1.573 ms  2.861 ms  1.695 ms  1.704 ms  2.063 ms
+ 3  [AS25] xe-5-2-0.inr-001-sut.berkeley.edu (128.32.0.66)  2.647 ms  7.292 ms  1.756 ms  1.640 ms  3.258 ms
+ 4  [AS2152] dc-sfo-agg-1--ucb-10ge.cenic.net (137.164.50.16)  2.632 ms  2.725 ms  2.811 ms  2.906 ms  3.980 ms
+ 5  [AS2152] dc-oak-agg4--sfo-agg1-10ge-2.cenic.net (137.164.22.11)  3.672 ms  4.916 ms  4.610 ms  5.142 ms  4.666 ms
+ 6  [AS2152] dc-paix-px1--oak-agg4-10ge.cenic.net (137.164.47.174)  4.487 ms  14.909 ms  9.301 ms  4.129 ms  4.147 ms
+ 7  [AS4637] ix-pa3.kddnet.ad.jp (198.32.176.66)  12.371 ms  45.460 ms  4.998 ms  12.907 ms  4.437 ms
+ 8  [AS2516] pajbb002.kddnet.ad.jp (124.211.34.133)  4.249 ms  4.237 ms
+    [AS2516] pajbb001.kddnet.ad.jp (124.211.34.125)  21.876 ms  4.116 ms
+    [AS2516] pajbb002.int-gw.kddi.ne.jp (111.87.3.29)  4.044 ms
+ 9  [AS2516] obpjbb206.int-gw.kddi.ne.jp (203.181.100.105)  127.177 ms
+    [AS2516] obpjbb205.int-gw.kddi.ne.jp (203.181.100.181)  108.494 ms  108.965 ms
+    [AS2516] obpjbb206.int-gw.kddi.ne.jp (203.181.100.105)  127.239 ms  127.262 ms
+10  [AS2516] jc-osa301.int-gw.kddi.ne.jp (113.157.227.82)  109.029 ms
+    [AS2516] jc-osa301.int-gw.kddi.ne.jp (113.157.227.118)  121.312 ms  121.922 ms
+    [AS2516] jc-osa301.kddnet.ad.jp (113.157.227.34)  116.494 ms
+    [AS2516] jc-osa301.kddnet.ad.jp (113.157.227.10)  121.391 ms
+11  [AS2516] 125.29.30.126 (125.29.30.126)  114.760 ms  115.356 ms  120.311 ms  114.626 ms  114.160 ms
+12  [AS17511] 121.83.230.226 (121.83.230.226)  122.881 ms
+    [AS17511] 121.83.230.230 (121.83.230.230)  121.478 ms  125.847 ms  115.264 ms  115.341 ms
+13  [AS17511] 121.83.231.126 (121.83.231.126)  123.032 ms  126.591 ms
+    [AS17511] 121.83.231.122 (121.83.231.122)  122.361 ms
+    [AS17511] 121.83.231.126 (121.83.231.126)  122.543 ms  122.642 ms
+14  [AS17511] 218.228.242.6 (218.228.242.6)  125.121 ms  119.619 ms  127.285 ms  125.593 ms  124.977 ms
+15  [AS17511] kobecity.kobe-ic.net (203.140.74.187)  115.599 ms  121.755 ms  122.375 ms  121.653 ms  115.290 ms
+16  [AS17511] 202.246.160.48 (202.246.160.48)  127.673 ms  132.573 ms  132.877 ms  125.278 ms  132.503 ms
+ORIG_HOSTNAME: www.vutbr.cz
+traceroute to piranha.ro.vutbr.cz (147.229.2.90), 64 hops max, 52 byte packets
+ 1  [AS0] xe-1/2/0-540.inr-306-sut.berkeley.edu (10.142.116.1)  7.912 ms  6.904 ms  10.472 ms  1.527 ms  2.640 ms
+ 2  [AS25] t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)  2.314 ms  1.740 ms  1.585 ms  1.580 ms  4.454 ms
+ 3  [AS25] xe-5-2-0.inr-001-sut.berkeley.edu (128.32.0.66)  1.641 ms  2.574 ms  1.741 ms  2.081 ms  1.628 ms
+ 4  [AS2152] hpr-svl--ucb-10ge.cenic.net (137.164.27.132)  3.708 ms  4.739 ms  3.864 ms  3.839 ms  3.801 ms
+ 5  [AS2152] hpr-lax-hpr3--svl-hpr3-100ge.cenic.net (137.164.25.73)  11.846 ms  12.188 ms  11.878 ms  12.766 ms  11.928 ms
+ 6  [AS2152] hpr-i2--lax-hpr2-r&e.cenic.net (137.164.26.201)  12.666 ms  16.153 ms  13.061 ms  12.172 ms  12.032 ms
+ 7  [AS0] et-1-0-0.111.rtr.hous.net.internet2.edu (198.71.45.20)  44.344 ms  45.277 ms  44.766 ms  49.611 ms  44.869 ms
+ 8  [AS0] et-3-3-0.4070.rtsw.atla.net.internet2.edu (198.71.45.12)  68.801 ms  70.540 ms  69.049 ms  68.254 ms  68.456 ms
+ 9  [AS0] et-11-1-0.4072.rtsw.wash.net.internet2.edu (198.71.45.7)  81.275 ms  97.958 ms  81.569 ms  81.966 ms  81.088 ms
+10  [AS21320] internet2.mx1.fra.de.geant.net (62.40.125.17)  165.606 ms  168.694 ms  188.862 ms  181.333 ms  166.677 ms
+11  [AS21320] ae4.mx1.pra.cz.geant.net (62.40.98.74)  188.969 ms  198.241 ms  191.742 ms  197.491 ms  185.276 ms
+12  [AS21320] cesnet-gw.mx1.pra.cz.geant.net (62.40.124.30)  187.124 ms  192.278 ms  195.977 ms  213.013 ms  200.193 ms
+13  [AS2852] 195.113.235.81 (195.113.235.81)  184.598 ms  194.906 ms  188.041 ms  184.517 ms  187.390 ms
+14  [AS5588] 62.168.32.34 (62.168.32.34)  182.101 ms  192.775 ms  201.027 ms  183.305 ms  184.669 ms
+15  [AS197451] pe-kou.net.vutbr.cz (147.229.252.113)  192.163 ms  179.559 ms  180.041 ms  182.352 ms  193.100 ms
+16  [AS197451] irf-kou.net.vutbr.cz (147.229.252.214)  182.539 ms  182.426 ms  209.185 ms  196.627 ms  192.711 ms
+17  [AS197451] piranha.ro.vutbr.cz (147.229.2.90)  176.714 ms !Z  178.267 ms !Z  177.064 ms !Z  180.559 ms !Z  186.043 ms !Z
+ORIG_HOSTNAME: zanvarsity.ac.tz
+traceroute to zanvarsity.ac.tz (41.204.148.1), 64 hops max, 52 byte packets
+ 1  [AS0] xe-1/2/0-540.inr-306-sut.berkeley.edu (10.142.116.1)  1.872 ms  7.818 ms  5.004 ms  1.399 ms  1.307 ms
+ 2  [AS25] t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)  1.739 ms  2.525 ms  2.672 ms  3.520 ms  2.280 ms
+ 3  [AS25] xe-5-2-0.inr-001-sut.berkeley.edu (128.32.0.66)  1.805 ms  3.028 ms  1.876 ms  1.856 ms  3.932 ms
+ 4  [AS2152] dc-sfo-agg-1--ucb-10ge.cenic.net (137.164.50.16)  3.609 ms  25.104 ms  4.738 ms  2.638 ms  4.002 ms
+ 5  [AS2152] dc-svl-agg4--sfo-agg1-10ge-1.cenic.net (137.164.22.27)  4.184 ms  4.252 ms  3.995 ms  4.341 ms  7.573 ms
+ 6  [AS3356] 10-1-1-91.ear1.sanjose1.level3.net (4.15.122.45)  4.069 ms  4.954 ms  4.012 ms  4.008 ms  4.105 ms
+ 7  [AS3356] ae-116-3502.edge3.london15.level3.net (4.69.167.78)  138.443 ms
+    [AS3356] ae-225-3601.edge3.london15.level3.net (4.69.167.90)  146.189 ms
+    [AS3356] ae-228-3604.edge3.london15.level3.net (4.69.167.102)  138.481 ms
+    [AS3356] ae-225-3601.edge3.london15.level3.net (4.69.167.90)  139.894 ms
+    [AS3356] ae-227-3603.edge3.london15.level3.net (4.69.167.98)  137.994 ms
+ 8  [AS3356] ae-228-3604.edge3.london15.level3.net (4.69.167.102)  138.855 ms  139.113 ms
+    [AS3356] ae-227-3603.edge3.london15.level3.net (4.69.167.98)  145.711 ms
+    [AS3356] ae-115-3501.edge3.london15.level3.net (4.69.167.74)  145.479 ms
+    [AS3356] ae-225-3601.edge3.london15.level3.net (4.69.167.90)  138.691 ms
+ 9  [AS9057] wananchi-gr.edge3.london15.level3.net (212.113.9.182)  138.832 ms  139.477 ms  138.693 ms  138.787 ms  139.706 ms
+10  [AS15399] 41.212.1.86 (41.212.1.86)  148.737 ms  138.565 ms  139.212 ms  138.648 ms  142.762 ms
+11  [AS15399] 82.2.212.41.in-addr.arpa (41.212.2.82)  295.934 ms  351.999 ms  345.021 ms  304.275 ms  313.474 ms
+12  [AS36930] 41.204.128.169 (41.204.128.169)  315.381 ms  372.528 ms  313.845 ms  313.138 ms  279.683 ms
+13  * * * * *
+14  [AS36930] 41.204.148.5 (41.204.148.5)  298.940 ms  374.571 ms *  325.669 ms  313.402 ms
+15  [AS36930] 41.204.148.1 (41.204.148.1)  313.568 ms  298.708 ms  388.713 ms  313.372 ms  313.473 ms
