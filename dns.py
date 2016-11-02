@@ -1,8 +1,11 @@
 import subprocess
 from utils import *
 import json
-import os
 import numpy as np
+import matplotlib.pyplot as plot
+import time
+from matplotlib.backends import backend_pdf
+from collections import defaultdict
 
 def run_dig(hostname_filename, output_filename, dns_query_server=None):
     digs = []
@@ -11,7 +14,8 @@ def run_dig(hostname_filename, output_filename, dns_query_server=None):
         while i < 5:
             hostname_dig = {}
             hostname_dig[NAME_KEY] = hostname
-            hostname_dig[SUCCESS_KEY], hostname_dig[QUERIES_KEY] = call_dig(hostname, dns_query_server)
+            hostname_dig[SUCCESS_KEY], hostname_dig[QUERIES_KEY] = \
+            call_dig(hostname, dns_query_server)
             digs.append(hostname_dig)
             i += 1
     # write json outputs
@@ -74,62 +78,158 @@ def construct_dig_command(hostname, dns_query_server):
 def get_average_ttls(filename):
     json_data = open(filename,"r").read()
     data = json.loads(json_data)
-    total_root_ttl = []
-    total_tld_ttl = []
-    total_other_ttl = []
-    total_terminating_ttl = []
+    root_ttl = defaultdict(list)
+    tld_ttl = defaultdict(list)
+    other_ttl = defaultdict(list)
+    terminating_ttl = defaultdict(list)
+    average_root_ttl = []
+    average_tld_ttl = []
+    average_other_ttl = []
+    average_terminating_ttl = []
 
     for dig in data:
-        answers = dig[QUERIES_KEY][ANSWERS_KEY]
-        root = [answers[key][TTL_KEY] for key in answers if \
-            answers[key][QUERIED_NAME_KEY] == "."]
-        tld = [answers[key][TTL_KEY] for key in answers if \
-            answers[key][QUERIED_NAME_KEY] == "com."]
-        other = [answers[key][TTL_KEY] for key in answers if \
-            answers[key][QUERIED_NAME_KEY] != "." and
-            answers[key][QUERIED_NAME_KEY] != "com."]
-        term = [answers[key][TTL_KEY] for key in answers if \
-            answers[key][TYPE_KEY] == "A" and
-            answers[key][TYPE_KEY] == "CNAME"]
-        total_root_ttl += np.mean(root)
-        total_tld_ttl += np.mean(tld)
-        total_other_ttl += np.mean(other)
-        total_terminating_ttl += np.mean(term)
+        queries = dig[QUERIES_KEY]
+        for query in queries:
+            answers = query[ANSWERS_KEY]
+            for answer in answers:
+                queried_name = answer[QUERIED_NAME_KEY]
+                ttl = int(answer[TTL_KEY])
+                if queried_name == ".":
+                    root_ttl[dig[NAME_KEY]] += [ttl]
+                elif queried_name == "com.":
+                    tld_ttl[dig[NAME_KEY]] += [ttl]
+                else:
+                    other_ttl[dig[NAME_KEY]] += [ttl]
 
-    average_root_ttl = np.mean(total_root_ttl)
-    average_tld_ttl = np.mean(total_tld_ttl)
-    average_other_ttl = np.mean(total_other_ttl)
-    average_terminating_ttl = np.mean(total_terminating_ttl)
+                if answer[TYPE_KEY] == "A" or answer[TYPE_KEY] == "CNAME":
+                    terminating_ttl[dig[NAME_KEY]] += [ttl]
+
+    for hostname in root_ttl:
+        average_root_ttl += [np.mean(root_ttl[hostname])]
+    for hostname in tld_ttl:
+        average_tld_ttl += [np.mean(tld_ttl[hostname])]
+    for hostname in other_ttl:
+        average_other_ttl += [np.mean(other_ttl[hostname])]
+    for hostname in terminating_ttl:
+        average_terminating_ttl += [np.mean(terminating_ttl[hostname])]
+
+
+    average_root_ttl = np.mean(average_root_ttl)
+    average_tld_ttl = np.mean(average_tld_ttl)
+    average_other_ttl = np.mean(average_other_ttl)
+    average_terminating_ttl = np.mean(average_terminating_ttl)
 
     return [average_root_ttl, average_tld_ttl, average_other_ttl, \
-        average_terminating_ttl]
-
+    average_terminating_ttl]
 
 def get_average_times(filename):
     json_data = open(filename,"r").read()
     data = json.loads(json_data)
-    avgs = [[],[]]
-    for dig in data:
+    avg0, avg1 = get_query_average_times(data)
+    for host in avg0:
+        avg0 += [np.mean(avg0[host])]
+        avg1 += [np.mean(avg1[host])]
+    avg0 = np.mean(avg0)
+    avg1 = np.mean(avg1)
+    return [avg0, avg1]
 
+def get_query_average_times(data):
+    avgs = [defaultdict(list), defaultdict(list)]
+    for dig in data:
         queries = dig[QUERIES_KEY]
         total = 0
+        i = 0
         for query in queries:
-            total += query[TIME_KEY]
-            if query[TYPE_KEY] == "A" or query[TYPE_KEY] == "CNAME":
-                final = query[TIME_KEY]
+            total += int(query[TIME_KEY])
+            if i == 3:
+                final = int(query[TIME_KEY])
+            i+=1
+
+        avgs[0][dig[NAME_KEY]] += [total]
+        avgs[1][dig[NAME_KEY]] += [final]
+
+    return [avgs[0], avgs[1]]
 
 def generate_time_cdfs(json_filename, output_filename):
-    pass
+    json_data = open(json_filename,"r").read()
+    data = json.loads(json_data)
+    avgs = get_query_average_times(data)
+    x1 = []
+    x2 = []
+    for key in avgs[0]:
+        x1 += avgs[0][key]
+        x2 += avgs[1][key]
+    x1 = np.sort(x1)
+    x2 = np.sort(x2)
+    y1 = cdf_y_vals(x1)
+    y2 = cdf_y_vals(x2)
+    fig = plot.figure()
+    plot.step(x1,y1)
+    plot.step(x2,y2)
+    plot.grid()
+    plot.xlabel('ms')
+    plot.ylabel('Cumulative fraction')
+    plot.show()
+    with backend_pdf.PdfPages(output_filename) as pdf:
+        pdf.savefig(fig)
+
+def cdf_y_vals(sorted_x_vals):
+    y_vals = np.arange(len(sorted_x_vals))/float(len(sorted_x_vals))
+    return y_vals
 
 def count_different_dns_responses(filename1, filename2):
-    pass
+    json_data1 = open(filename1,"r").read()
+    data1 = json.loads(json_data1)
+    json_data2 = open(filename2,"r").read()
+    data2 = json.loads(json_data2)
+
+    dns_response1 = get_dns_response(data1,1)
+    dns_response2 = get_dns_response(data2,2)
+    diff1 = 0
+    diff2 = 0
+
+    for key in dns_response1:
+        set1 = set(dns_response1[key])
+        set2 = set(dns_response2[key])
+        if len(set1) > 1:
+            print key, 1
+            diff1 += 1
+            diff2 += 1
+        elif set1 != set2:
+            diff2 += 1
+            print "203.160.180.2", key, 1
+    return diff1, diff2
+
+def get_dns_response(data, i):
+    dns_response = {}
+    for dig in data:
+        queries = dig[QUERIES_KEY]
+        for query in queries:
+            answers = query[ANSWERS_KEY]
+            for answer in answers:
+                ans_type = answer[TYPE_KEY]
+                if  ans_type == "A" or ans_type == "CNAME":
+                    if dig[NAME_KEY] in dns_response:
+                        dns_response[dig[NAME_KEY]] += [answer[ANSWER_DATA_KEY]]
+                    else:
+                        dns_response[dig[NAME_KEY]] = [answer[ANSWER_DATA_KEY]]
+    return dns_response
 
 def main():
-    alexa_hosts = open('alexa_top_100','r').read().split('\n')[:-1]
-    run_dig(alexa_hosts, "results/dns_output_1.json")
-    # SECONDS_IN_HOUR = 60*60
+    # alexa_hosts = open('alexa_top_100','r').read().split('\n')[:-1]
+    # run_dig(alexa_hosts, "results/dns_output_other_server.json", "203.160.180.2")
+    # run_dig(alexa_hosts, "results/dns_output_1.json")
+    # SECONDS_IN_HOUR = 60*60 + 5
     # time.sleep(SECONDS_IN_HOUR)
     # run_dig(alexa_hosts, "results/dns_output_2.json")
+    # get_average_ttls("results/dns_output_1.json")
+    print "difference in dns response with server from makati "\
+    + str(count_different_dns_responses("results/dns_output_1.json",\
+    "results/dns_output_other_server.json"))
+    print "difference in dns response with server from makati "\
+    + str(count_different_dns_responses("results/dns_output_1.json",\
+    "results/dns_output_2.json"))
+    generate_time_cdfs("results/dns_output_1.json", "results/plots.pdf")
 
 if __name__ == "__main__":
     main()
