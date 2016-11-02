@@ -73,7 +73,7 @@ def parse_normal_traceroute(trace_output):
     if curr_hop is not None:
         curr_trace.append(curr_hop)
     record_results(curr_hostname, curr_trace, result)
-    return results
+    return result
 
 def is_timestamp(line):
     length = len(TIMESTAMP_PHRASE)
@@ -215,7 +215,7 @@ def part_b_run_from_our_computer():
     part_b_servers = ["tpr-route-server.saix.net",
                       "route-server.ip-plus.net",
                       "route-views.oregon-ix.net",
-                      "route-server.eastern.allstream.com"]
+                      "route-views.on.bb.telus.com"]
     run_traceroute(part_b_servers,5,"tmp_traces/tr_b_tmp")
     parse_traceroute("tmp_traces/tr_b_tmp","results/tr_b.json")
 
@@ -223,14 +223,14 @@ def part_b_parse_reverse():
     parse_traceroute("reverse_traces/combined-reverse-traces","results/tr_b.json")
 
 def main():
-    # part_b_run_from_our_computer()
+    part_b_run_from_our_computer()
 
-    SECONDS_IN_HOUR = 60*60
-    num_a_runs = 5
-    for i in range(num_a_runs):
-        part_a_run(i)
-        if (i < (num_a_runs-1)):
-            time.sleep(SECONDS_IN_HOUR)
+    #SECONDS_IN_HOUR = 60*60
+    #num_a_runs = 5
+    #for i in range(num_a_runs):
+    #    part_a_run(i)
+    #    if (i < (num_a_runs-1)):
+    #        time.sleep(SECONDS_IN_HOUR)
 
 if __name__ == "__main__":
     main()
