@@ -1,0 +1,18 @@
+REVERSE
+ORIG_HOSTNAME: route-views.on.bb.telus.com
+Tracing the route to t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)
+  1 toroonxngr00.bb.telus.com (154.11.63.85) [AS 852] 0 msec 0 msec 4 msec
+  2 toroonxngr00.bb.telus.com (154.11.6.86) [AS 852] 0 msec 0 msec 4 msec
+  3 NYCMNY83CI01.bb.telus.com (75.154.223.252) 8 msec 12 msec 8 msec
+  4 rtr.loss.net.internet2.edu (198.32.118.161) 12 msec 8 msec 12 msec
+  5 ae-0.0.rtr.eqch.net.internet2.edu (64.57.20.33) [AS 11164] 24 msec 24 msec 24 msec
+  6 ae-1.80.rtsw.chic.net.internet2.edu (64.57.20.150) [AS 11164] 24 msec 24 msec 24 msec
+  7 ae-0.80.rtsw.kans.net.internet2.edu (64.57.20.148) [AS 11164] 36 msec 36 msec 32 msec
+  8 ae-0.80.rtsw.salt.net.internet2.edu (64.57.20.146) [AS 11164] 56 msec 56 msec 56 msec
+  9 ae-2.80.rtsw.losa.net.internet2.edu (64.57.20.144) [AS 11164] 76 msec 76 msec 80 msec
+ 10 64.57.20.83 (64.57.20.83) [AS 11164] 80 msec 80 msec 80 msec
+ 11 dc-lax-agg6--lax-agg7-100g.cenic.net (137.164.11.10) [AS 2152] 80 msec 84 msec 84 msec
+ 12 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 80 msec 80 msec 76 msec
+ 13 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 84 msec 80 msec 80 msec
+ 14 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 84 msec 88 msec 84 msec
+ 15 t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 216 msec

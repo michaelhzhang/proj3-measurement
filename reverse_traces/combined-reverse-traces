@@ -1,130 +1,57 @@
 REVERSE
-TIMESTAMP: 1475470550.931312
-ORIG_HOSTNAME: tpr-route-server.saix.net 
-Tracing the route to airbears2-136-152-142-118.airbears2.berkeley.edu (136.152.142.118)
-1 tpr-ip-esr-1-fe-1-0-3.telkom-ipnet.co.za (196.25.9.45) 0 msec 0 msec 0 msec
-2 196.43.9.86 168 msec 168 msec 168 msec
-3 tenge7-2.var01.ldn04.pccwbtn.net (63.218.243.17) 208 msec 344 msec 196 msec
-4  *  *  *
-5 xe-7-0-0.0.rtsw.losa.net.internet2.edu (64.57.20.247) [AS 11164] 328 msec 404 msec 400 msec
-6 64.57.20.83 [AS 11164] 404 msec 400 msec 404 msec
-7 dc-lax-agg6--lax-agg7-100g.cenic.net (137.164.11.10) [AS 2152] 404 msec 400 msec 404 msec
-8 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 404 msec 504 msec 440 msec
-9 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 448 msec 440 msec 444 msec
-10 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 444 msec 440 msec 444 msec
-11 t2-3.inr-201-sut.berkeley.edu (128.32.0.37) [AS 25] 444 msec
-t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 440 msec 440 msec
-12 xe-1-0-0.inr-306-sut.berkeley.edu (128.32.0.57) [AS 25] 404 msec 344 msec
-xe-1-1-0.inr-306-sut.berkeley.edu (128.32.0.59) [AS 25] 336 msec
-13  *  *  *
-14  *  *  *
-15  *  *  *
-16  *  *  *
-17  *  *  *
-18  *  *  *
-19  *  *  *
-20  *  *  *
-21  *  *  *
-22  *  *  *
-23  *  *  *
-24  *  *  *
-25  *  *  *
-26  *  *  *
-27  *  *  *
-28  *  *  *
-29  *  *  *
-30  *  *  *
-ORIG_HOSTNAME: route-server.ip-plus.net 
-Type escape sequence to abort.
-Tracing the route to airbears2-136-152-142-118.airbears2.berkeley.edu (136.152.142.118)
+TIMESTAMP: 1478409498.438553
+ORIG_HOSTNAME: route-server.ip-plus.net
+Tracing the route to t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)
 VRF info: (vrf in name/id, vrf out name/id)
-1 i68geb-005-tunnel-ip1.bb.ip-plus.net (193.247.171.25) [AS 65000] 4 msec 4 msec 8 msec
-2 i00eqx-005-ten0-2-1-0.bb.ip-plus.net (138.187.159.53) [AS 65098] 104 msec 100 msec 100 msec
-3 eeq-exchange.tr01-asbnva01.transitrail.net (206.126.236.45) 100 msec 96 msec 100 msec
-4 xe-7-0-0.0.rtsw.losa.net.internet2.edu (64.57.20.247) [AS 11164] 156 msec 160 msec 160 msec
-5 64.57.20.83 [AS 11164] 156 msec 160 msec 160 msec
-6 dc-lax-agg6--lax-agg7-100g.cenic.net (137.164.11.10) [AS 2152] 160 msec 160 msec 160 msec
-7 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 168 msec 168 msec 168 msec
-8 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 168 msec 168 msec 168 msec
-9 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 168 msec 168 msec 168 msec
-10 t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 172 msec 168 msec 172 msec
-11 xe-1-0-0.inr-306-sut.berkeley.edu (128.32.0.57) [AS 25] 168 msec
-xe-1-1-0.inr-306-sut.berkeley.edu (128.32.0.59) [AS 25] 168 msec 168 msec
-12  *  *  *
-13  *  *  *
-14  *  *  *
-15  *  *  *
-16  *  *  *
-17  *  *  *
-18  *  *  *
-19  *  *  *
-20  *  *  *
-21  *  *  *
-22  *  *  *
-23  *  *  *
-24  *  *  *
-25  *  *  *
-26  *  *  *
-27  *  *  *
-28  *  *  *
-29  *  *  *
-30  *  *  *
-ORIG_HOSTNAME: route-views.oregon-ix.net 
-Type escape sequence to abort.
-Tracing the route to airbears2-136-152-142-118.airbears2.berkeley.edu (136.152.142.118)
+  1 i68geb-005-tunnel-ip1.bb.ip-plus.net (193.247.171.25) [AS 65000] 8 msec 8 msec 4 msec
+  2 i00eqx-005-ten0-2-1-0.bb.ip-plus.net (138.187.159.53) [AS 65098] 96 msec 100 msec 100 msec
+  3 eeq-exchange.tr01-asbnva01.transitrail.net (206.126.236.45) 100 msec 100 msec 96 msec
+  4 xe-7-0-0.0.rtsw.losa.net.internet2.edu (64.57.20.247) [AS 11164] 160 msec 160 msec 160 msec
+  5 64.57.20.83 (64.57.20.83) [AS 11164] 160 msec 156 msec 160 msec
+  6 dc-lax-agg6--lax-agg7-100g.cenic.net (137.164.11.10) [AS 2152] 160 msec 160 msec 160 msec
+  7 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 168 msec 168 msec 168 msec
+  8 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 168 msec 172 msec 168 msec
+  9 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 168 msec 168 msec 172 msec
+ 10  *  *  *
+ 11 t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 168 msec
+ORIG_HOSTNAME: route-views.oregon-ix.net
+Tracing the route to t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)
 VRF info: (vrf in name/id, vrf out name/id)
-1 vl-51.uonet1-gw.uoregon.edu (128.223.51.2) [AS 3582] 192 msec 48 msec 49 msec
-2 2.bundle-ether10.uonet10-gw.uoregon.edu (128.223.2.10) [AS 3582] 48 msec 48 msec 48 msec
-3 internet2-re1-gw.oregon-gigapop.net (198.32.165.126) [AS 58511] 49 msec 48 msec 48 msec
-4 hpr-lax-hpr2--i2-r&e.cenic.net (137.164.26.200) [AS 2153] 48 msec 48 msec 48 msec
-5 hpr-svl-hpr3--lax-hpr3-100ge.cenic.net (137.164.25.74) [AS 2153] 48 msec 48 msec 48 msec
-6 hpr-ucb--svl-hpr-10g.cenic.net (137.164.27.133) [AS 2153] 48 msec 49 msec 48 msec
-7 t1-3.inr-201-sut.berkeley.edu (128.32.0.65) [AS 25] 48 msec 48 msec
-t1-3.inr-202-reccev.berkeley.edu (128.32.0.67) [AS 25] 48 msec
-8 xe-1-1-0.inr-306-sut.berkeley.edu (128.32.0.59) [AS 25] 48 msec 49 msec 31 msec
-9  *  *  *
-10  *  *  *
-11  *  *  *
-12  *  *  *
-13  *  *  *
-14  *  *  *
-15  *  *  *
-16  *  *  *
-17  *  *  *
-18  *  *  *
-19  *  *  *
-20  *  *  *
-21  *  *  *
-22  *  *  *
-23  *  *  *
-24  *  *  *
-25  *  *  *
-26  *  *  *
-27  *  *  *
-28  *  *  *
-29  *  *  *
-30  *  *  *
-ORIG_HOSTNAME: route-server.eastern.allstream.com 
-Tracing the route to airbears2-136-152-142-118.airbears2.berkeley.edu (136.152.142.118)
-VRF info: (vrf in name/id, vrf out name/id)
-1 gig10-0-16.gwy1-mtl.bb.allstream.net (216.191.14.249) [AS 15290] 0 msec 0 msec 0 msec
-2 ae1.gw1-nyc.bb.allstream.net (199.212.160.173) 12 msec 16 msec 12 msec
-3 allstream.peer.van.gt.ca (216.191.65.134) 16 msec 16 msec 16 msec
-4 ae10.cr1.lga5.us.zip.zayo.com (64.125.20.78) [AS 6461] [MPLS: Label 644311 Exp 0] 16 msec 20 msec 20 msec
-5 ae27.cs1.lga5.us.eth.zayo.com (64.125.30.250) [AS 6461] [MPLS: Label 768102 Exp 0] 96 msec 104 msec 116 msec
-6 ae3.cs1.ord2.us.eth.zayo.com (64.125.29.209) [AS 6461] [MPLS: Label 650738 Exp 0] 80 msec 84 msec 80 msec
-7 ae0.cs2.ord2.us.eth.zayo.com (64.125.28.39) [AS 6461] [MPLS: Label 489911 Exp 0] 80 msec 80 msec 80 msec
-8 ae5.cs2.den5.us.eth.zayo.com (64.125.29.216) [AS 6461] [MPLS: Label 452491 Exp 0] 80 msec 80 msec 80 msec
-9 ae4.cs2.lax112.us.eth.zayo.com (64.125.31.11) [AS 6461] [MPLS: Label 608518 Exp 0] 80 msec 80 msec 80 msec
-10 ae27.cr2.lax112.us.zip.zayo.com (64.125.30.187) [AS 6461] [MPLS: Label 598623 Exp 0] 84 msec 80 msec 108 msec
-11  *  *  *
-12 lax-agg6--zayo-la1.cenic.net (198.32.251.213) [AS 2152] 80 msec 80 msec 80 msec
-13 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 80 msec 80 msec 80 msec
-14 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 80 msec 80 msec 84 msec
-15 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 80 msec 80 msec 84 msec
-16 t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 80 msec 200 msec 200 msec
-17 xe-1-1-0.inr-306-sut.berkeley.edu (128.32.0.59) [AS 25] 200 msec 80 msec 80 msec
-18  *  *  *
-19  *  *  *
-20  *  *  *
-21  *  *  *
+  1 vl-51.uonet1-gw.uoregon.edu (128.223.51.2) [AS 3582] 1 msec 1 msec 0 msec
+  2 2.bundle-ether10.uonet10-gw.uoregon.edu (128.223.2.10) [AS 3582] 1 msec 2 msec 1 msec
+  3 internet2-re1-gw.oregon-gigapop.net (198.32.165.126) [AS 58511] 24 msec 32 msec 25 msec
+  4 hpr-lax-hpr2--i2-r&e.cenic.net (137.164.26.200) [AS 2153] 24 msec 29 msec 25 msec
+  5 hpr-svl-hpr3--lax-hpr3-100ge.cenic.net (137.164.25.74) [AS 2153] 28 msec 28 msec 28 msec
+  6 hpr-ucb--svl-hpr-10g.cenic.net (137.164.27.133) [AS 2153] 49 msec 30 msec 48 msec
+  7 t1-3.inr-202-reccev.berkeley.edu (128.32.0.67) [AS 25] 30 msec *  30 msec
+ORIG_HOSTNAME: tpr-route-server.saix.net
+Tracing the route to t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)
+  1 tpr-ip-esr-1-fe-1-0-3.telkom-ipnet.co.za (196.25.9.45) 0 msec 0 msec 0 msec
+  2 lon-ip-hsll-1-gig-5-1-0.telkom-ipnet.co.za (196.43.9.50) 168 msec 168 msec 168 msec
+  3 tenge7-2.var01.ldn04.pccwbtn.net (63.218.243.17) 180 msec 180 msec 180 msec
+  4  *  *  *
+  5 xe-7-0-0.0.rtsw.losa.net.internet2.edu (64.57.20.247) [AS 11164] 324 msec 332 msec 328 msec
+  6 64.57.20.83 (64.57.20.83) [AS 11164] 324 msec 324 msec 320 msec
+  7 dc-lax-agg6--lax-agg7-100g.cenic.net (137.164.11.10) [AS 2152] 344 msec 324 msec 324 msec
+  8 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 328 msec 328 msec 328 msec
+  9 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 332 msec 328 msec 332 msec
+ 10 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 340 msec 344 msec 440 msec
+ 11  *  *  *
+ 12 t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 400 msec *
+ORIG_HOSTNAME: route-views.on.bb.telus.com
+Tracing the route to t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)
+  1 toroonxngr00.bb.telus.com (154.11.63.85) [AS 852] 0 msec 0 msec 4 msec
+  2 toroonxngr00.bb.telus.com (154.11.6.86) [AS 852] 0 msec 0 msec 4 msec
+  3 NYCMNY83CI01.bb.telus.com (75.154.223.252) 8 msec 12 msec 8 msec
+  4 rtr.loss.net.internet2.edu (198.32.118.161) 12 msec 8 msec 12 msec
+  5 ae-0.0.rtr.eqch.net.internet2.edu (64.57.20.33) [AS 11164] 24 msec 24 msec 24 msec
+  6 ae-1.80.rtsw.chic.net.internet2.edu (64.57.20.150) [AS 11164] 24 msec 24 msec 24 msec
+  7 ae-0.80.rtsw.kans.net.internet2.edu (64.57.20.148) [AS 11164] 36 msec 36 msec 32 msec
+  8 ae-0.80.rtsw.salt.net.internet2.edu (64.57.20.146) [AS 11164] 56 msec 56 msec 56 msec
+  9 ae-2.80.rtsw.losa.net.internet2.edu (64.57.20.144) [AS 11164] 76 msec 76 msec 80 msec
+ 10 64.57.20.83 (64.57.20.83) [AS 11164] 80 msec 80 msec 80 msec
+ 11 dc-lax-agg6--lax-agg7-100g.cenic.net (137.164.11.10) [AS 2152] 80 msec 84 msec 84 msec
+ 12 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 80 msec 80 msec 76 msec
+ 13 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 84 msec 80 msec 80 msec
+ 14 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 84 msec 88 msec 84 msec
+ 15 t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 216 msec

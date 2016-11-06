@@ -16,13 +16,13 @@ def ping_format_check(output):
 def rtt_part_a_check(text):
     output = json.loads(text)
     ping_format_check(output)
-    
+
     if len(output) != 100:
         raise Exception("expected 100 websites, got " + str(len(output)) + " websites")
     for h, rtts in output.iteritems():
         if len(rtts) != 10:
             raise Exception("expected 10 pings for website " + h + ", got " + str(len(rtts)) + " pings")
-    
+
     top_100_sites = [x for x in open("./alexa_top_100", 'r').read().split('\n') if x != '']
     for h in top_100_sites:
         if h not in output:
@@ -33,9 +33,9 @@ def rtt_part_a_check(text):
 def rtt_part_b_check(text):
     output = json.loads(text)
     ping_format_check(output)
-    
+
     sites = ["google.com", "todayhumor.co.kr", "zanvarsity.ac.tz", "taobao.com"]
-    
+
     if len(output) != len(sites):
         raise Exception("expected " + str(len(sites)) + " websites, got " + str(len(output)) + " websites")
     for h, rtts in output.iteritems():
@@ -51,7 +51,7 @@ def path_check(path):
     if type(path) != list:
         msg = "expected list type for 'path' value, instead got type " + str(type(path))
         raise Exception(msg)
-                
+
     for hop in path:
         if type(hop) != list:
             msg = "expected list type for each hop in 'path' value, instead got type " + str(type(hop))
@@ -67,7 +67,7 @@ def path_check(path):
             if "ASN" not in server:
                 msg = "'ASN' not found"
                 raise Exception(msg)
-            
+
 def tr_single_run_check(output, sites):
     if len(output) != len(sites) + 1:
         msg = "expected %u sites, got %u sites" % (len(sites), len(output) - 1)
@@ -102,10 +102,10 @@ def tr_part_a_check(text):
         tr_single_run_check(output, sites)
 
     print "Traceroute part a PASS"
-                    
+
 def tr_part_b_check(text):
-    sites = ["tpr-route-server.saix.net", "route-server.ip-plus.net", "route-views.oregon-ix.net", "route-server.eastern.allstream.com"]
-    
+    sites = ["tpr-route-server.saix.net", "route-server.ip-plus.net", "route-views.oregon-ix.net", "route-views.on.bb.telus.com"]# "route-server.eastern.allstream.com"]
+
     lines = text.split('\n')
 
     if (len(lines) != 2):
@@ -149,14 +149,14 @@ def dns_check(text):
     print "DNS output a PASS"
 
 def check_file(func, fname):
-    try: 
+    try:
         f = open(fname, 'r')
         text = f.read()
         f.close()
         func(text)
     except Exception as e:
         print e.message
-    
+
 def main():
     parser = argparse.ArgumentParser(description="CS168 Project 3 Tests")
     parser.add_argument("--rtt-part-a", dest="rtt_part_a", type=str, action="store")

@@ -132,11 +132,11 @@ def parse_hop(line):
     ip = tokens[AS_index+2].lstrip('(').rstrip(')')
     result = {}
     if ASN == "*": # Not responding
-        result["asn"] = "None"
+        result["ASN"] = "None"
         result["name"] = "None"
         result["ip"] = "None"
     else:
-        result["asn"] = ASN
+        result["ASN"] = ASN
         result["name"] = name
         result["ip"] = ip
     return result
@@ -183,17 +183,23 @@ def parse_reverse_hop(line):
     tokens = line.split()
     assert(len(tokens)>=3)
     name = tokens[name_index]
-    ip = tokens[name_index+1].lstrip('(').rstrip(')')
-    ASN = tokens[name_index+2].lstrip('[AS').rstrip(']')
+    ip = re.search('(\(\d+\.\d+\.\d+\.\d+\))',line) # IP numbers of form (###.###.###.###)
+    ASN = re.search('(\[AS\s\d+\])',line) # AS numbers of form [AS ####]
     result = {}
     if name == "*": # Not responding
-        result["asn"] = "None"
+        result["ASN"] = "None"
         result["name"] = "None"
         result["ip"] = "None"
     else:
-        result["asn"] = ASN
+        if ASN is None:
+            result["ASN"] = "None"
+        else:
+            result["ASN"] = ASN.group(1).lstrip('[AS ').rstrip(']')
         result["name"] = name
-        result["ip"] = ip
+        if ip is None:
+            result["ip"] = "None"
+        else:
+            result["ip"] = ip.group(1).lstrip('(').rstrip(')')
     return result
 
 def part_a_run(run_num):

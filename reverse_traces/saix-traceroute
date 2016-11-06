@@ -1,0 +1,15 @@
+REVERSE
+ORIG_HOSTNAME: tpr-route-server.saix.net
+Tracing the route to t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)
+  1 tpr-ip-esr-1-fe-1-0-3.telkom-ipnet.co.za (196.25.9.45) 0 msec 0 msec 0 msec
+  2 lon-ip-hsll-1-gig-5-1-0.telkom-ipnet.co.za (196.43.9.50) 168 msec 168 msec 168 msec
+  3 tenge7-2.var01.ldn04.pccwbtn.net (63.218.243.17) 180 msec 180 msec 180 msec
+  4  *  *  *
+  5 xe-7-0-0.0.rtsw.losa.net.internet2.edu (64.57.20.247) [AS 11164] 324 msec 332 msec 328 msec
+  6 64.57.20.83 (64.57.20.83) [AS 11164] 324 msec 324 msec 320 msec
+  7 dc-lax-agg6--lax-agg7-100g.cenic.net (137.164.11.10) [AS 2152] 344 msec 324 msec 324 msec
+  8 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 328 msec 328 msec 328 msec
+  9 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 332 msec 328 msec 332 msec
+ 10 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 340 msec 344 msec 440 msec
+ 11  *  *  *
+ 12 t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 400 msec *

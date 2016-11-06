@@ -1,0 +1,11 @@
+REVERSE
+ORIG_HOSTNAME: route-views.oregon-ix.net
+Tracing the route to t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)
+VRF info: (vrf in name/id, vrf out name/id)
+  1 vl-51.uonet1-gw.uoregon.edu (128.223.51.2) [AS 3582] 1 msec 1 msec 0 msec
+  2 2.bundle-ether10.uonet10-gw.uoregon.edu (128.223.2.10) [AS 3582] 1 msec 2 msec 1 msec
+  3 internet2-re1-gw.oregon-gigapop.net (198.32.165.126) [AS 58511] 24 msec 32 msec 25 msec
+  4 hpr-lax-hpr2--i2-r&e.cenic.net (137.164.26.200) [AS 2153] 24 msec 29 msec 25 msec
+  5 hpr-svl-hpr3--lax-hpr3-100ge.cenic.net (137.164.25.74) [AS 2153] 28 msec 28 msec 28 msec
+  6 hpr-ucb--svl-hpr-10g.cenic.net (137.164.27.133) [AS 2153] 49 msec 30 msec 48 msec
+  7 t1-3.inr-202-reccev.berkeley.edu (128.32.0.67) [AS 25] 30 msec *  30 msec

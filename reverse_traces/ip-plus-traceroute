@@ -1,0 +1,15 @@
+REVERSE
+ORIG_HOSTNAME: route-server.ip-plus.net
+Tracing the route to t5-4.inr-202-reccev.berkeley.edu (128.32.0.58)
+VRF info: (vrf in name/id, vrf out name/id)
+  1 i68geb-005-tunnel-ip1.bb.ip-plus.net (193.247.171.25) [AS 65000] 8 msec 8 msec 4 msec
+  2 i00eqx-005-ten0-2-1-0.bb.ip-plus.net (138.187.159.53) [AS 65098] 96 msec 100 msec 100 msec
+  3 eeq-exchange.tr01-asbnva01.transitrail.net (206.126.236.45) 100 msec 100 msec 96 msec
+  4 xe-7-0-0.0.rtsw.losa.net.internet2.edu (64.57.20.247) [AS 11164] 160 msec 160 msec 160 msec
+  5 64.57.20.83 (64.57.20.83) [AS 11164] 160 msec 156 msec 160 msec
+  6 dc-lax-agg6--lax-agg7-100g.cenic.net (137.164.11.10) [AS 2152] 160 msec 160 msec 160 msec
+  7 dc-svl-agg4--lax-agg6-100ge.cenic.net (137.164.11.1) [AS 2152] 168 msec 168 msec 168 msec
+  8 dc-oak-agg4--svl-agg4-100ge.cenic.net (137.164.46.144) [AS 2152] 168 msec 172 msec 168 msec
+  9 ucb--oak-agg4-10g.cenic.net (137.164.50.31) [AS 2152] 168 msec 168 msec 172 msec
+ 10  *  *  *
+ 11 t2-3.inr-202-reccev.berkeley.edu (128.32.0.39) [AS 25] 168 msec
