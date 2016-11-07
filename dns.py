@@ -18,6 +18,7 @@ def run_dig(hostname_filename, output_filename, dns_query_server=None):
             call_dig(hostname, dns_query_server)
             digs.append(hostname_dig)
             i += 1
+
     # write json outputs
     with open(output_filename,'w') as out:
         json.dump(digs, out)
@@ -28,25 +29,48 @@ def call_dig(hostname, dns_query_server):
         shell_output = subprocess.check_output(command, shell=True)
     except subprocess.CalledProcessError as e: # in case exit code nonzero
         shell_output = e.output
-    return parse_dig_output(shell_output)
+    if dns_query_server:
+        output = parse_dig_output_server(shell_output)
+    else:
+        output = parse_dig_output_trace(shell_output)
+    return output
 
-def parse_dig_output(shell_output):
+def parse_dig_output_server(shell_output):
     shell_output = shell_output.decode('UTF-8')
     if ((shell_output.find("A") != -1) or (shell_output.find("CNAME") != -1)):
         success = True
     else:
         success = False
+    Queries = []
+    if success:
+        query_dict = {}
+        query_dict[ANSWERS_KEY] = compute_answers(shell_output)
+        time = shell_output.split("\n\n")[-2].split("\n")[0].split()[-2]
+        query_dict[TIME_KEY] = time
+        Queries = [query_dict]
+    else:
+        Queries = None
+    return success, Queries
 
+def parse_dig_output_trace(shell_output):
+    shell_output = shell_output.decode('UTF-8')
+    if ((shell_output.find("A") != -1) or (shell_output.find("CNAME") != -1)):
+        success = True
+    else:
+        success = False
     raw_queries = shell_output.split("\n\n")
     Queries = []
-
-    for query in raw_queries:
-        if (len(query) == 0 or query[0] == "="):
-            continue
-        query_dict = {}
-        query_dict[TIME_KEY] = query[-5:-3]
-        query_dict[ANSWERS_KEY] = compute_answers(query)
-        Queries.append(query_dict)
+    if success:
+        for query in raw_queries:
+            if (len(query) == 0 or query[0] == "="):
+                continue
+            time = query.split('\n')[-1].split()[-2]
+            query_dict = {}
+            query_dict[TIME_KEY] = time
+            query_dict[ANSWERS_KEY] = compute_answers(query)
+            Queries.append(query_dict)
+    else:
+        Queries = None
     return success, Queries
 
 def compute_answers(query):
@@ -126,11 +150,13 @@ def get_average_times(filename):
     json_data = open(filename,"r").read()
     data = json.loads(json_data)
     avg0, avg1 = get_query_average_times(data)
+    av0 = []
+    av1 = []
     for host in avg0:
-        avg0 += [np.mean(avg0[host])]
-        avg1 += [np.mean(avg1[host])]
-    avg0 = np.mean(avg0)
-    avg1 = np.mean(avg1)
+        av0 += [np.mean(avg0[host])]
+        av1 += [np.mean(avg1[host])]
+    avg0 = np.mean(av0)
+    avg1 = np.mean(av1)
     return [avg0, avg1]
 
 def get_query_average_times(data):
@@ -138,6 +164,7 @@ def get_query_average_times(data):
     for dig in data:
         queries = dig[QUERIES_KEY]
         total = 0
+        final = 0
         i = 0
         for query in queries:
             total += int(query[TIME_KEY])
@@ -164,11 +191,12 @@ def generate_time_cdfs(json_filename, output_filename):
     y1 = cdf_y_vals(x1)
     y2 = cdf_y_vals(x2)
     fig = plot.figure()
-    plot.step(x1,y1)
-    plot.step(x2,y2)
+    plot.step(x1,y1, label = "Final request time")
+    plot.step(x2,y2, label = "Total time")
     plot.grid()
     plot.xlabel('ms')
     plot.ylabel('Cumulative fraction')
+    plot.legend()
     plot.show()
     with backend_pdf.PdfPages(output_filename) as pdf:
         pdf.savefig(fig)
@@ -183,8 +211,8 @@ def count_different_dns_responses(filename1, filename2):
     json_data2 = open(filename2,"r").read()
     data2 = json.loads(json_data2)
 
-    dns_response1 = get_dns_response(data1,1)
-    dns_response2 = get_dns_response(data2,2)
+    dns_response1 = get_dns_response(data1)
+    dns_response2 = get_dns_response(data2)
     diff1 = 0
     diff2 = 0
 
@@ -192,27 +220,31 @@ def count_different_dns_responses(filename1, filename2):
         set1 = set(dns_response1[key])
         set2 = set(dns_response2[key])
         if len(set1) > 1:
-            print key, 1
+            # print key, 1
             diff1 += 1
             diff2 += 1
         elif set1 != set2:
             diff2 += 1
-            print "203.160.180.2", key, 1
+        # if set1!= set2:
+            # print "203.160.180.2", key, 1
     return diff1, diff2
 
-def get_dns_response(data, i):
+def get_dns_response(data):
     dns_response = {}
     for dig in data:
         queries = dig[QUERIES_KEY]
-        for query in queries:
-            answers = query[ANSWERS_KEY]
-            for answer in answers:
-                ans_type = answer[TYPE_KEY]
-                if  ans_type == "A" or ans_type == "CNAME":
-                    if dig[NAME_KEY] in dns_response:
-                        dns_response[dig[NAME_KEY]] += [answer[ANSWER_DATA_KEY]]
-                    else:
-                        dns_response[dig[NAME_KEY]] = [answer[ANSWER_DATA_KEY]]
+        # print "LOOK HEREREREERERERE"
+        # print queries
+        if queries:
+            for query in queries:
+                answers = query[ANSWERS_KEY]
+                for answer in answers:
+                    ans_type = answer[TYPE_KEY]
+                    if  ans_type == "A" or ans_type == "CNAME":
+                        if dig[NAME_KEY] in dns_response:
+                            dns_response[dig[NAME_KEY]] += [answer[ANSWER_DATA_KEY]]
+                        else:
+                            dns_response[dig[NAME_KEY]] = [answer[ANSWER_DATA_KEY]]
     return dns_response
 
 def main():
@@ -222,11 +254,13 @@ def main():
     # SECONDS_IN_HOUR = 60*60 + 5
     # time.sleep(SECONDS_IN_HOUR)
     # run_dig(alexa_hosts, "results/dns_output_2.json")
-    # get_average_ttls("results/dns_output_1.json")
+    print get_average_ttls("results/dns_output_1.json")
     print "difference in dns response with server from makati "\
     + str(count_different_dns_responses("results/dns_output_1.json",\
     "results/dns_output_other_server.json"))
-    print "difference in dns response with server from makati "\
+    print get_average_times("results/dns_output_1.json")
+    print get_average_times("results/dns_output_other_server.json")
+    print "difference in dns response with one hour difference "\
     + str(count_different_dns_responses("results/dns_output_1.json",\
     "results/dns_output_2.json"))
     generate_time_cdfs("results/dns_output_1.json", "results/plots.pdf")

@@ -229,7 +229,11 @@ def part_b_parse_reverse():
     parse_traceroute("reverse_traces/combined-reverse-traces","results/tr_b.json")
 
 def main():
-    part_b_run_from_our_computer()
+    # part_b_run_from_our_computer()
+
+    trace_file = open("results/tr_b.json","r")
+    for line in trace_file:
+        print 1
 
     #SECONDS_IN_HOUR = 60*60
     #num_a_runs = 5

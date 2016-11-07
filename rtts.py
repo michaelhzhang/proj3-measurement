@@ -134,24 +134,48 @@ def plot_ping_cdf(raw_ping_results_filename, output_cdf_filename):
     with backend_pdf.PdfPages(output_cdf_filename) as pdf:
         pdf.savefig(fig)
 
+def print_rate(agg_ping_results_filename):
+    json_data = open(agg_ping_results_filename,"r").read()
+    data = json.loads(json_data)
+    num_fail = 0
+    num_noresponse = 0
+
+    for hostname in data:
+        rtts = data[hostname]
+        if rtts["drop_rate"] == 100:
+            num_noresponse += 1.0
+        if rtts["drop_rate"] > 0:
+            num_fail += 1.0
+
+    print "Percent of websites that do not respond: ", num_noresponse/len(data)
+    print "Percent with at least one failed ping: ", num_fail/len(data)
+
+def print_rtt_rate(agg_ping_results_filename):
+    json_data = open(agg_ping_results_filename,"r").read()
+    data = json.loads(json_data)
+
+    for hostname in data:
+        print hostname, data[hostname]
+
 def main():
-    # rtt_a
-    print("Alexa")
-    alexa_hosts = open('alexa_top_100','r').read().split('\n')[:-1]
-    run_ping(alexa_hosts, 10, 'results/rtt_a_raw.json','results/rtt_a_agg.json')
+    # # rtt_a
+    # print("Alexa")
+    # alexa_hosts = open('alexa_top_100','r').read().split('\n')[:-1]
+    # run_ping(alexa_hosts, 10, 'results/rtt_a_raw.json','results/rtt_a_agg.json')
+    #
+    # # rtt_b
+    # print('part b')
+    # b_hosts = ['google.com', 'todayhumor.co.kr', 'zanvarsity.ac.tz', 'taobao.com']
+    # run_ping(b_hosts, 500, 'results/rtt_b_raw.json', 'results/rtt_b_agg.json')
 
-    # rtt_b
-    print('part b')
-    b_hosts = ['google.com', 'todayhumor.co.kr', 'zanvarsity.ac.tz', 'taobao.com']
-    run_ping(b_hosts, 500, 'results/rtt_b_raw.json', 'results/rtt_b_agg.json')
+    print_rate('results/rtt_a_agg.json')
+    # # Plotting
+    # print("plotting a")
+    # plot_median_rtt_cdf('results/rtt_a_agg.json','plots/rtt_a_median_cdf.pdf')
 
-    # Plotting
-    print("plotting a")
-    plot_median_rtt_cdf('results/rtt_a_agg.json','plots/rtt_a_median_cdf.pdf')
-
-    print('plotting b')
-    plot_ping_cdf('results/rtt_b_raw.json','plots/rtt_b_raw_cdf.pdf')
+    print_rtt_rate('results/rtt_b_agg.json')
+    # print('plotting b')
+    # plot_ping_cdf('results/rtt_b_raw.json','plots/rtt_b_raw_cdf.pdf')
 
 if __name__ == "__main__":
     main()
-
