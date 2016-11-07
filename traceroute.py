@@ -228,12 +228,103 @@ def part_b_run_from_our_computer():
 def part_b_parse_reverse():
     parse_traceroute("reverse_traces/combined-reverse-traces","results/tr_b.json")
 
-def main():
-    # part_b_run_from_our_computer()
+def count_ASes(filename):
+    """ For short answer a.2"""
+    lines = open(filename,"r").read().strip().split('\n')
+    ASNs = {}
+    for line in lines:
+        data = json.loads(line)
+        for host in data:
+            if host == "timestamp":
+                continue
+            if host not in ASNs:
+                ASNs[host] = set([])
+            hops = data[host]
+            for hop in hops:
+                for entry in hop:
+                    ASN = entry["ASN"]
+                    if ASN != "None":
+                        ASNs[host].add(ASN)
+    ASN_counts = {}
+    for host in ASNs:
+        ASN_counts[host] = len(ASNs[host])
+    print(ASNs)
+    print(ASN_counts)
 
-    trace_file = open("results/tr_b.json","r")
-    for line in trace_file:
-        print 1
+def count_unique_routes(filename):
+    """ for short answer a.4"""
+    lines = open(filename,"r").read().strip().split('\n')
+    routes = {}
+    for line in lines:
+        data = json.loads(line)
+        for host in data:
+            if host == "timestamp":
+                continue
+            if host not in routes:
+                routes[host] = []
+            hops = data[host]
+            curr_route = []
+            for hop in hops:
+                ips = set([])
+                for entry in hop:
+                    ip = entry["ip"]
+                    if ip != "None":
+                        ips.add(ip)
+                curr_route.append(ips)
+            new = True
+            for route in routes[host]:
+                if (routes_equal(route, curr_route)):
+                    new = False
+            if new:
+                routes[host].append(curr_route)
+    counts = {}
+    for host in routes:
+        counts[host] = len(routes[host])
+    print(counts)
+
+def routes_equal(route1,route2):
+    if len(route1) != len(route2):
+        return False
+    for i in range(len(route1)):
+        if route1[i] != route2[i]:
+            return False
+    return True
+
+def count_ips_per_hop(filename):
+    """for short answer a.3"""
+    lines = open(filename,"r").read().strip().split('\n')
+    ips_per_hop = {}
+    for line in lines:
+        data = json.loads(line)
+        for host in data:
+            if host == "timestamp":
+                continue
+            if host not in ips_per_hop:
+                ips_per_hop[host] = {}
+            hops = data[host]
+            hop_counts = ips_per_hop[host]
+            for i in range(len(hops)):
+                if i not in hop_counts:
+                    hop_counts[i] = set([])
+                curr_hop = hops[i]
+                for entry in curr_hop:
+                    ip = entry["ip"]
+                    if ip != "None":
+                        hop_counts[i].add(ip)
+    print(ips_per_hop)
+    num_ips_per_hop = {}
+    for host in ips_per_hop:
+        counts = {}
+        hops = ips_per_hop[host]
+        for i in hops:
+            hop_ips = hops[i]
+            counts[i] = len(hop_ips)
+        num_ips_per_hop[host] = counts
+    print(num_ips_per_hop)
+
+def main():
+    pass
+    # part_b_run_from_our_computer()
 
     #SECONDS_IN_HOUR = 60*60
     #num_a_runs = 5
